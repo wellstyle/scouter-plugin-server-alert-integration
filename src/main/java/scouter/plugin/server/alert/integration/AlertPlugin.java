@@ -19,11 +19,13 @@ public class AlertPlugin {
     }
 
     @ServerPlugin(PluginConstants.PLUGIN_SERVER_ALERT)
-    public void alert(final AlertPack pack){
+    public void alert(final AlertPack pack) {
         println("[alert] " + pack);
 
         if (NotificationService.SLACK.shouldRun(groupConf, pack)) {
+            println("[slack] " + pack);
             SlackThread slackThread = new SlackThread(groupConf, pack);
+            slackThread.setUncaughtExceptionHandler(new ThreadExceptionHandler("[slack]"));
             slackThread.start();
         }
     }

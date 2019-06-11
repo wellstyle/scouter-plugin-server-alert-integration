@@ -45,37 +45,4 @@ public class SlackMessage {
 		this.iconEmoji = iconEmoji;
 	}
 	
-	public String getText() {
-		return text;
-	}
-	public void setText(String text) {
-		this.text = text;
-	}
-	public String getChannel() {
-		return channel;
-	}
-	public void setChannel(String channel) {
-		this.channel = channel;
-	}
-	public String getBotName() {
-		return botName;
-	}
-	public void setBotName(String botName) {
-		this.botName = botName;
-	}
-	public String getIconURL() {
-		return iconURL;
-	}
-	public void setIconURL(String iconURL) {
-		this.iconURL = iconURL;
-	}
-
-	public String getIconEmoji() {
-		return iconEmoji;
-	}
-
-	public void setIconEmoji(String iconEmoji) {
-		this.iconEmoji = iconEmoji;
-	}
-
 }

@@ -15,6 +15,8 @@ import scouter.plugin.server.alert.integration.common.Utility;
 import scouter.server.Logger;
 import scouter.server.core.AgentManager;
 
+import java.io.IOException;
+
 /**
  * Thread class that sends messages via slack
  *
@@ -25,8 +27,13 @@ public class SlackThread extends Thread {
 
     private final MonitoringGroupConfigure groupConf;
     private final AlertPack pack;
+    private String objType = "undefined";
 
     public SlackThread(MonitoringGroupConfigure groupConf, AlertPack alertPack) {
+        if (groupConf == null || alertPack == null) {
+            throw new IllegalArgumentException("groupConf or alertPack is null");
+        }
+
         this.groupConf = groupConf;
         this.pack = alertPack;
     }
@@ -34,8 +41,7 @@ public class SlackThread extends Thread {
     @Override
     public void run() {
         try {
-
-            String objType = pack.objType;
+            objType = pack.objType;
             String objName = AgentManager.getAgentName(pack.objHash);
 
             if (pack.objType.equals("scouter")) {
@@ -56,11 +62,6 @@ public class SlackThread extends Thread {
             SlackMessage message = new SlackMessage(content.toString(), channel, botName, iconURL, iconEmoji);
             String payload = new Gson().toJson(message);
 
-            if (groupConf.getBoolean("ext_plugin_slack_debug", pack.objType, false)) {
-                println("WebHookURL : " + webhookURL);
-                println("param : " + payload);
-            }
-
             HttpPost post = new HttpPost(webhookURL);
             post.addHeader("Content-Type", "application/json");
             // charset set utf-8
@@ -75,20 +76,19 @@ public class SlackThread extends Thread {
                 println("Slack message sent to [" + channel + "] successfully.");
             } else {
                 println("Slack message sent failed. Verify below information.");
-                println("[WebHookURL] : " + webhookURL);
-                println("[Message] : " + payload);
-                println("[Reason] : " + EntityUtils.toString(response.getEntity(), "UTF-8"));
+                println("[webhookURL] : " + webhookURL);
+                println("[request payload] : " + payload);
+                println("[response status] : " + response.getStatusLine());
+                println("[response body] : " + EntityUtils.toString(response.getEntity(), "UTF-8"));
+                throw new SlackRequestException("Slack message sent failed.");
             }
-        } catch (Exception e) {
-            println("[Error] : " + e.getMessage());
-            if (groupConf.isTrace()) {
-                e.printStackTrace();
-            }
+        } catch (IOException e) {
+            println("[IOException] : " + e);
         }
     }
 
     private void println(Object o) {
-        if(groupConf.getBoolean("ext_plugin_slack_debug", pack.objType, true)) { //default false normally, but true now for test purpose.
+        if (groupConf.getBoolean("ext_plugin_slack_debug", objType, true)) { //default false normally, but true now for test purpose.
             System.out.println(o);
             Logger.println(o);
         }
