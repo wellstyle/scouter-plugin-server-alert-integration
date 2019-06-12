@@ -1,6 +1,10 @@
 package scouter.plugin.server.alert.integration.common;
 
-public class Utility {
+public class StringUtil {
+
+    private StringUtil() {
+        throw new IllegalStateException("utility class");
+    }
 
     public static String getValue(String message, String attr) {
         try {
@@ -10,6 +14,10 @@ public class Utility {
         } catch (Exception e) {
             return "";
         }
+    }
+
+    public static boolean isEmpty(String s) {
+        return s == null || s.length() == 0;
     }
 
 }

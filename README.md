@@ -38,7 +38,7 @@ app-host.ext_plugin_slack_channel=#wonder-auth
     - scouter.common
     - scouter.server
 - Library
-    - slack
+    - slack, telegram
         - commons-codec-1.9.jar
         - commons-logging-1.2.jar
         - gson-2.6.2.jar

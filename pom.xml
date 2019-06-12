@@ -59,7 +59,7 @@
             <version>1.8.3</version>
             <scope>provided</scope>
         </dependency>
-        <!-- Slack -->
+        <!-- Slack, Telegram -->
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>

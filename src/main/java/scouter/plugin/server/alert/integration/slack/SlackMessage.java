@@ -23,6 +23,7 @@ import com.google.gson.annotations.SerializedName;
  * Alert message class to send alert via Slack
  * 
  * @author Se-Wang Lee(ssamzie101@gmail.com) on 2016. 5. 2.
+ * @author yj.seo(wellstyle@gmail.com) on 2019. 6. 5.
  */
 public class SlackMessage {
 	
@@ -44,5 +45,24 @@ public class SlackMessage {
 		this.iconURL = iconURL;
 		this.iconEmoji = iconEmoji;
 	}
-	
+
+	public String getText() {
+		return text;
+	}
+
+	public String getChannel() {
+		return channel;
+	}
+
+	public String getBotName() {
+		return botName;
+	}
+
+	public String getIconEmoji() {
+		return iconEmoji;
+	}
+
+	public String getIconURL() {
+		return iconURL;
+	}
 }
