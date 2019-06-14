@@ -1,35 +1,45 @@
 # scouter-plugin-server-alert-integration
 
+Scouter에서 발생하는 `Alert` 메시지를 `Telegram`과 `Slack`으로 전송하는 플러그인 입니다.
+
 ## Info
 
-- Server Plugin and Built-in Plugin
-- Scouter Alert messages are sent over variable notification services (slack, telegram, email, etc...)
-- Configurable by monitoring group
+- 기존 [scouter-plugin-server-alert-telegram](https://github.com/scouter-project/scouter-plugin-server-alert-telegram), [scouter-plugin-server-alert-slack](https://github.com/scouter-project/scouter-plugin-server-alert-slack) 플러그인을 통합
+- 다른 서비스들도 간단하게 추가하기 위한 구조로 변경
+- `scouter-plugin-server-alert-slack`의 [monitoring_group_type 별 알림을 줄 수 있는 옵션](https://github.com/scouter-project/scouter-plugin-server-alert-slack/commit/2817d9bdfe250b6567450507a1043c82e3725742) 적용하여 모니터링 그룹에 따라 멀티 채널로 전송 가능
 
 ## Configuration 
 
 ### Example 
 
 ``` properties
-# <SCOUTER_HOME>/server/conf/scouter.conf
-
 # Alert Common
-ext_plugin_alert_debug=true
+ext_plugin_alert_debug=true # default: true
 
 # Alert Slack
-ext_plugin_slack_send_alert=true
-ext_plugin_slack_debug=true
-ext_plugin_slack_level=1
-ext_plugin_slack_webhook_url=https://hooks.slack.com/services/T02XXXXX/B159XXXXX/W5CDXXXXXXXXXXXXXXXXXXXX
-ext_plugin_slack_channel=#scouter
-ext_plugin_slack_botName=scouter
-ext_plugin_slack_icon_emoji=:computer:
-ext_plugin_slack_icon_url=http://XXX.XXX.XXX/XXX.gif
-ext_plugin_slack_xlog_enabled=true
+ext_plugin_alert_slack_enable=true # default: false
+ext_plugin_alert_slack_debug=true # default: true
+ext_plugin_alert_slack_level=0 # default: 0
+ext_plugin_alert_slack_webhook_url=https://hooks.slack.com/services/T02XXXXX/B159XXXXX/W5CDXXXXXXXXXXXXXXXXXXXX
+ext_plugin_alert_slack_channel=#scouter
+ext_plugin_alert_slack_bot_name=scouter
+ext_plugin_alert_slack_icon_emoji=:computer:
 
 ## Alert Slack for Monitoring Group
-app.ext_plugin_slack_channel=#wonder-auth
-app-host.ext_plugin_slack_channel=#wonder-auth
+group-1.ext_plugin_alert_slack_channel=#group-1
+group-2.ext_plugin_alert_slack_channel=#group-2
+group-2.ext_plugin_alert_slack_level=2 # monitoring_group_type=group-2 에 level=2 적용
+
+# Alert Telegram
+ext_plugin_alert_telegram_enable=true # default: false
+ext_plugin_alert_telegram_debug=true # default: true
+ext_plugin_alert_telegram_level=0 # default: 0
+ext_plugin_alert_telegram_bot_token=NNNNNNNNN:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+ext_plugin_alert_telegram_chat_id=@ScouterDemoChannel # 공개 채널인 경우는 @채널명, 비공개 채널인 경우는 chatId
+
+## Alert Telegram for Monitoring Group
+group-1.ext_plugin_alert_telegram_chat_id=@ScouterDemoGroup1Channel
+group-2.ext_plugin_alert_telegram_chat_id=@ScouterDemoGroup2Channel
 ```
 
 ## Dependencies
@@ -38,7 +48,7 @@ app-host.ext_plugin_slack_channel=#wonder-auth
     - scouter.common
     - scouter.server
 - Library
-    - slack, telegram
+    - for slack, telegram
         - commons-codec-1.9.jar
         - commons-logging-1.2.jar
         - gson-2.6.2.jar
