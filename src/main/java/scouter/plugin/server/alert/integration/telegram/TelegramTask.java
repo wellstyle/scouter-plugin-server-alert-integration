@@ -14,7 +14,7 @@ import java.io.IOException;
  * Thread class that sends messages via slack
  *
  * @author Se-Wang Lee(ssamzie101@gmail.com) on 2016. 5. 2.
- * @author yj.seo(wellstyle@gmail.com) on 2019. 6. 5.
+ * @author yj.seo on 2019. 6. 5.
  */
 public class TelegramTask implements Runnable {
 

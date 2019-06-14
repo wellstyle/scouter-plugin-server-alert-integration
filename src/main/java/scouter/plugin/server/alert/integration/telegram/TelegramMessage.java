@@ -23,7 +23,7 @@ import com.google.gson.annotations.SerializedName;
  * Alert message class to send alert via telegram
  *
  * @author Sang-Cheon Park(nices96@gmail.com) on 2016. 3. 28.
- * @author yj.seo(wellstyle@gmail.com) on 2019. 6. 11.
+ * @author yj.seo on 2019. 6. 11.
  */
 public class TelegramMessage {
 

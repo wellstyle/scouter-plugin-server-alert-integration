@@ -10,7 +10,9 @@ import scouter.plugin.server.alert.integration.telegram.TelegramTask;
 import scouter.server.Configure;
 
 /**
- * @author yj.seo (wellstyle@gmail.com) on 2019. 6. 5.
+ * AlertPlugin main class
+ *
+ * @author yj.seo on 2019. 6. 5.
  */
 public class AlertPlugin {
     private final Configure conf = Configure.getInstance();

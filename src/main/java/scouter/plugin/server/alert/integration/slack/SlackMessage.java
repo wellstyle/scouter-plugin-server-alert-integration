@@ -23,7 +23,7 @@ import com.google.gson.annotations.SerializedName;
  * Alert message class to send alert via Slack
  * 
  * @author Se-Wang Lee(ssamzie101@gmail.com) on 2016. 5. 2.
- * @author yj.seo(wellstyle@gmail.com) on 2019. 6. 5.
+ * @author yj.seo on 2019. 6. 5.
  */
 public class SlackMessage {
 	
