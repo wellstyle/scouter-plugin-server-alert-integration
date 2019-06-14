@@ -1,6 +1,6 @@
 # scouter-plugin-server-alert-integration
 
-[![Build Status](https://travis-ci.org/wellstyle/scouter-plugin-server-alert-integration.svg?branch=master)](https://travis-ci.org/wellstyle/scouter-plugin-server-alert-integration)
+[![Build Status](https://travis-ci.com/wellstyle/scouter-plugin-server-alert-integration.svg?branch=master)](https://travis-ci.com/wellstyle/scouter-plugin-server-alert-integration)
 [![Code Coverage](https://codecov.io/gh/wellstyle/scouter-plugin-server-alert-integration/branch/master/graph/badge.svg)](https://codecov.io/gh/wellstyle/scouter-plugin-server-alert-integration)
 
 Scouter에서 발생하는 `Alert` 메시지를 `Telegram`과 `Slack`으로 전송하는 플러그인 입니다.
