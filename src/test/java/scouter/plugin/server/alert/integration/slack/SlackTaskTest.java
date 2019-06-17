@@ -34,7 +34,6 @@ public class SlackTaskTest {
         when(groupConfigure.getValue(Properties.EXT_PLUGIN_ALERT_SLACK_BOT_NAME, objType)).thenReturn("scouter");
         when(groupConfigure.getValue(Properties.EXT_PLUGIN_ALERT_SLACK_ICON_URL, objType)).thenReturn("");
         when(groupConfigure.getValue(Properties.EXT_PLUGIN_ALERT_SLACK_ICON_EMOJI, objType)).thenReturn(":computer:");
-        when(groupConfigure.getBoolean(Properties.EXT_PLUGIN_ALERT_SLACK_DEBUG, objType, true)).thenReturn(true);
         when(groupConfigure.isTrace()).thenReturn(true);
     }
 

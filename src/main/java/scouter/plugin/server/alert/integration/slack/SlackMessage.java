@@ -25,7 +25,7 @@ import com.google.gson.annotations.SerializedName;
  * @author Se-Wang Lee(ssamzie101@gmail.com) on 2016. 5. 2.
  * @author yj.seo on 2019. 6. 5.
  */
-public class SlackMessage {
+class SlackMessage {
 	
 	@SerializedName("text")
 	private String text;
@@ -38,7 +38,7 @@ public class SlackMessage {
 	@SerializedName("icon_url")
 	private String iconURL;
 	
-	public SlackMessage(String text, String channel, String botName, String iconURL, String iconEmoji) {
+	SlackMessage(String text, String channel, String botName, String iconURL, String iconEmoji) {
 		this.text = text;
 		this.channel = channel;
 		this.botName = botName;
@@ -46,23 +46,4 @@ public class SlackMessage {
 		this.iconEmoji = iconEmoji;
 	}
 
-	public String getText() {
-		return text;
-	}
-
-	public String getChannel() {
-		return channel;
-	}
-
-	public String getBotName() {
-		return botName;
-	}
-
-	public String getIconEmoji() {
-		return iconEmoji;
-	}
-
-	public String getIconURL() {
-		return iconURL;
-	}
 }

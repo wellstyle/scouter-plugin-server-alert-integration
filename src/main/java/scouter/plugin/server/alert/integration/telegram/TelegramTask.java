@@ -1,12 +1,10 @@
 package scouter.plugin.server.alert.integration.telegram;
 
 import com.google.gson.Gson;
-import org.apache.http.HttpResponse;
-import org.apache.http.HttpStatus;
-import org.apache.http.util.EntityUtils;
 import scouter.lang.pack.AlertPack;
 import scouter.plugin.server.alert.integration.MonitoringGroupConfigure;
 import scouter.plugin.server.alert.integration.common.*;
+import scouter.plugin.server.alert.integration.common.sender.http.DefaultHttpSender;
 
 import java.io.IOException;
 
@@ -19,9 +17,10 @@ import java.io.IOException;
 public class TelegramTask implements Runnable {
 
     private static final String URL_TEMPLATE = "https://api.telegram.org/bot<TOKEN>/sendMessage";
+
     private final MonitoringGroupConfigure groupConf;
     private final AlertPack pack;
-    private String objType = "undefined";
+    private final AlertLogger logger = new AlertLogger();
 
     public TelegramTask(MonitoringGroupConfigure groupConf, AlertPack alertPack) {
         this.groupConf = groupConf;
@@ -31,7 +30,9 @@ public class TelegramTask implements Runnable {
     @Override
     public void run() {
         try {
-            objType = AlertPackUtil.getObjType(pack);
+            logger.println("Start thread.");
+
+            String objType = AlertPackUtil.getObjType(pack);
             String objName = AlertPackUtil.getObjName(pack);
 
             // Get server configurations for telegram
@@ -48,25 +49,12 @@ public class TelegramTask implements Runnable {
             String payload = new Gson().toJson(message);
 
             // send the post request
-            HttpResponse response = RestClient.post(url, payload);
+            DefaultHttpSender httpSender = new DefaultHttpSender();
+            httpSender.post(url, payload);
 
-            if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
-                println("Message sent to [" + chatId + "] successfully.");
-            } else {
-                println("Message sent to [" + chatId + "] failed. Verify below information.");
-                println("[URL] : " + url);
-                println("[Payload] : " + payload);
-                println("[Response Status] : " + response.getStatusLine());
-                println("[Response Body] : " + EntityUtils.toString(response.getEntity(), "UTF-8"));
-            }
+            logger.println("End thread.");
         } catch (IOException e) {
-            println("[IOException] : " + e);
-        }
-    }
-
-    private void println(Object o) {
-        if (groupConf.getBoolean(Properties.EXT_PLUGIN_ALERT_TELEGRAM_DEBUG, objType, true)) { //default false normally, but true now for test purpose.
-            PluginLogger.println(o);
+            logger.println("[IOException] : " + e);
         }
     }
 

@@ -1,12 +1,10 @@
 package scouter.plugin.server.alert.integration.slack;
 
 import com.google.gson.Gson;
-import org.apache.http.HttpResponse;
-import org.apache.http.HttpStatus;
-import org.apache.http.util.EntityUtils;
 import scouter.lang.pack.AlertPack;
 import scouter.plugin.server.alert.integration.MonitoringGroupConfigure;
 import scouter.plugin.server.alert.integration.common.*;
+import scouter.plugin.server.alert.integration.common.sender.http.DefaultHttpSender;
 
 import java.io.IOException;
 
@@ -20,7 +18,7 @@ public class SlackTask implements Runnable {
 
     private final MonitoringGroupConfigure groupConf;
     private final AlertPack pack;
-    private String objType = "undefined";
+    private final AlertLogger logger = new AlertLogger();
 
     public SlackTask(MonitoringGroupConfigure groupConf, AlertPack alertPack) {
         this.groupConf = groupConf;
@@ -30,7 +28,9 @@ public class SlackTask implements Runnable {
     @Override
     public void run() {
         try {
-            objType = AlertPackUtil.getObjType(pack);
+            logger.println("Start thread.");
+
+            String objType = AlertPackUtil.getObjType(pack);
             String objName = AlertPackUtil.getObjName(pack);
 
             String webhookURL = groupConf.getValue(Properties.EXT_PLUGIN_ALERT_SLACK_WEBHOOK_URL, objType);
@@ -46,25 +46,12 @@ public class SlackTask implements Runnable {
             SlackMessage message = new SlackMessage(content.toString(), channel, botName, iconURL, iconEmoji);
             String payload = new Gson().toJson(message);
 
-            HttpResponse response = RestClient.post(webhookURL, payload);
+            DefaultHttpSender httpSender = new DefaultHttpSender();
+            httpSender.post(webhookURL, payload);
 
-            if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
-                println("Message sent to [" + channel + "] successfully.");
-            } else {
-                println("Message sent to [" + channel + "] failed. Verify below information.");
-                println("[URL] : " + webhookURL);
-                println("[Payload] : " + payload);
-                println("[Response Status] : " + response.getStatusLine());
-                println("[Response Body] : " + EntityUtils.toString(response.getEntity(), "UTF-8"));
-            }
+            logger.println("End thread.");
         } catch (IOException e) {
-            println("[IOException] : " + e);
-        }
-    }
-
-    private void println(Object o) {
-        if (groupConf.getBoolean(Properties.EXT_PLUGIN_ALERT_SLACK_DEBUG, objType, true)) { //default false normally, but true now for test purpose.
-            PluginLogger.println(o);
+            logger.println("[IOException] : " + e);
         }
     }
 

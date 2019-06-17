@@ -29,7 +29,6 @@ public class TelegramTaskTest {
         alertPack.message = "/app-018c7d617462955c5/app-018c7d617462955c5 is not running. OBJECT  objType=" + objType
             + " objHash=z1d6f0r6 objName=/app-018c7d617462955c5/app-018c7d617462955c5 addr=127.0.0.1 2.5.1 2018-12-16 08:55 GMT_ENV_java8plus 2019-06-05 02:50:08.02 {counter=0,detected=tomcat,ADC=false}";
 
-        when(groupConfigure.getBoolean(Properties.EXT_PLUGIN_ALERT_TELEGRAM_DEBUG, objType, true)).thenReturn(true);
         when(groupConfigure.isTrace()).thenReturn(true);
     }
 

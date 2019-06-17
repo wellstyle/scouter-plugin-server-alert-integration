@@ -25,24 +25,16 @@ import com.google.gson.annotations.SerializedName;
  * @author Sang-Cheon Park(nices96@gmail.com) on 2016. 3. 28.
  * @author yj.seo on 2019. 6. 11.
  */
-public class TelegramMessage {
+class TelegramMessage {
 
     @SerializedName("chat_id")
     private String chatId;
     @SerializedName("text")
     private String text;
 
-    public TelegramMessage(String chatId, String text) {
+    TelegramMessage(String chatId, String text) {
         this.chatId = chatId;
         this.text = text;
-    }
-
-    public String getChatId() {
-        return chatId;
-    }
-
-    public String getText() {
-        return text;
     }
 
 }

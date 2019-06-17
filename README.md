@@ -21,7 +21,6 @@ ext_plugin_alert_debug=true # default: true
 
 # Alert Slack
 ext_plugin_alert_slack_enable=true # default: false
-ext_plugin_alert_slack_debug=true # default: true
 ext_plugin_alert_slack_level=0 # default: 0
 ext_plugin_alert_slack_webhook_url=https://hooks.slack.com/services/T02XXXXX/B159XXXXX/W5CDXXXXXXXXXXXXXXXXXXXX
 ext_plugin_alert_slack_channel=#scouter
@@ -35,7 +34,6 @@ group-2.ext_plugin_alert_slack_level=2 # monitoring_group_type=group-2 에 level
 
 # Alert Telegram
 ext_plugin_alert_telegram_enable=true # default: false
-ext_plugin_alert_telegram_debug=true # default: true
 ext_plugin_alert_telegram_level=0 # default: 0
 ext_plugin_alert_telegram_bot_token=NNNNNNNNN:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 ext_plugin_alert_telegram_chat_id=@ScouterDemoChannel # 공개 채널인 경우는 @채널명, 비공개 채널인 경우는 chatId
