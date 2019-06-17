@@ -14,7 +14,8 @@ public class AlertPackUtil {
 
     public static String getObjType(AlertPack pack) {
         if (pack.objType.equals("scouter")) {
-            return StringUtil.getValue(pack.message, "objType");
+            String objType = StringUtil.getValue(pack.message, "objType");
+            return objType.isEmpty() ? pack.objType : objType;
         } else {
             return pack.objType;
         }
@@ -23,7 +24,8 @@ public class AlertPackUtil {
 
     public static String getObjName(AlertPack pack) {
         if (pack.objType.equals("scouter")) {
-            return StringUtil.getValue(pack.message, "objName");
+            String objName = StringUtil.getValue(pack.message, "objName");
+            return objName.isEmpty() ? AgentManager.getAgentName(pack.objHash) : objName;
         } else {
             return AgentManager.getAgentName(pack.objHash);
         }
