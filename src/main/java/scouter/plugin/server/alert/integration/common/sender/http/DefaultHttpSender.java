@@ -33,6 +33,10 @@ public class DefaultHttpSender implements HttpSender {
         handleResponse(url, response);
     }
 
+    public void setErrorHandler(ResponseErrorHandler errorHandler) {
+        this.errorHandler = errorHandler;
+    }
+
     private void handleResponse(String url, HttpResponse response) throws IOException {
         if (errorHandler.hasError(response)) {
             logger.println("Failed to send message. Invoking error handler. Verify below information.");

@@ -15,12 +15,13 @@
  *  
  *  @author Gookeun Lim
  */
-package scouter.plugin.server.alert.integration;
+package scouter.plugin.server.alert.integration.common;
 
 import org.junit.Test;
+import scouter.plugin.server.alert.integration.common.MonitoringGroupConfigure;
 import scouter.server.Configure;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -105,5 +106,22 @@ public class MonitoringGroupConfigureTest {
 		when(conf.getValue(objType+".ext_plugin_slack_elapsed_time_threshold")).thenReturn("true");
 		assertEquals(Boolean.TRUE, sut.getBoolean("ext_plugin_slack_elapsed_time_threshold", objType, Boolean.FALSE));
 	}
-	
+
+	@Test
+	public void test_isTrace() {
+		Configure conf = mock(Configure.class);
+		sut = new MonitoringGroupConfigure(conf);
+
+		assertFalse(sut.isTrace());
+	}
+
+	@Test
+	public void test_isTrace_thenTrue() {
+		Configure conf = mock(Configure.class);
+		sut = new MonitoringGroupConfigure(conf);
+		conf._trace = true;
+
+		assertTrue(sut.isTrace());
+	}
+
 }

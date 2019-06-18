@@ -3,29 +3,51 @@ package scouter.plugin.server.alert.integration.common;
 import org.junit.Test;
 import scouter.lang.pack.AlertPack;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 public class StringUtilTest {
 
+    private static final String MESSAGE_TEMPLATE = "app01 is not running. OBJECT  objType=tomcat objHash=z1d6f0r6 objName=app01 addr=127.0.0.1";
+
     @Test
-    public void testGetValue() {
+    public void getValue() {
+        String expectObjName = "app01";
+        String expectObjType = "tomcat";
         AlertPack alertPack = new AlertPack();
-        alertPack.message = "/app-018c7d617462955c5/app-018c7d617462955c5 is not running. OBJECT  objType=app objHash=z1d6f0r6 objName=/app-018c7d617462955c5/app-018c7d617462955c5 addr=10.40.202.120 2.5.1 2018-12-16 08:55 GMT_ENV_java8plus 2019-06-05 02:50:08.02 {counter=0,detected=tomcat,ADC=false}";
+        alertPack.message = MESSAGE_TEMPLATE;
 
-        String objectName = StringUtil.getValue(alertPack.message, "objName");
-        String objectType = StringUtil.getValue(alertPack.message, "objType");
+        String objName = StringUtil.getValue(alertPack.message, "objName");
+        String objType = StringUtil.getValue(alertPack.message, "objType");
 
-        assertEquals("/app-018c7d617462955c5/app-018c7d617462955c5", objectName);
-        assertEquals("app", objectType);
+        assertEquals(expectObjName, objName);
+        assertEquals(expectObjType, objType);
     }
 
     @Test
-    public void testGetValueException() {
+    public void getValue_givenNoAttrMessage_thenEmptyString() {
+        String expectObjName = "app01";
+        AlertPack alertPack = new AlertPack();
+        alertPack.message = MESSAGE_TEMPLATE.replaceAll("objName=", "objName");
+
+        String objName = StringUtil.getValue(alertPack.message, "objName");
+
+        assertTrue(objName.isEmpty());
+    }
+
+    @Test
+    public void getValue_givenAbnormalMessage_thenEmptyString() {
         String objectName = StringUtil.getValue("message", "objName");
         String objectType = StringUtil.getValue(null, "objType");
 
         assertEquals("", objectName);
         assertEquals("", objectType);
+    }
+
+    @Test
+    public void isEmpty() {
+        assertTrue(StringUtil.isEmpty(null));
+        assertTrue(StringUtil.isEmpty(""));
+        assertFalse(StringUtil.isEmpty("abcd"));
     }
 
 }

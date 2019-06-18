@@ -3,13 +3,16 @@ package scouter.plugin.server.alert.integration.common;
 public class StringUtil {
 
     private StringUtil() {
-        throw new IllegalStateException("utility class");
     }
 
     public static String getValue(String message, String attr) {
         try {
-            int length = attr.length() + 1;
-            int beginIndex = message.indexOf(attr);
+            String str = attr + "=";
+            int length = str.length();
+            int beginIndex = message.indexOf(str);
+            if (beginIndex == -1) {
+                return "";
+            }
             return message.substring(beginIndex + length, message.indexOf(' ', beginIndex));
         } catch (Exception e) {
             return "";

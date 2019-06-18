@@ -15,7 +15,7 @@
  *  
  *  @author Gookeun Lim
  */
-package scouter.plugin.server.alert.integration;
+package scouter.plugin.server.alert.integration.common;
 
 import scouter.server.Configure;
 

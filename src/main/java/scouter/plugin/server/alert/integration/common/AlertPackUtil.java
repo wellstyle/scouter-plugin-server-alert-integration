@@ -9,7 +9,6 @@ import scouter.server.core.AgentManager;
 public class AlertPackUtil {
 
     private AlertPackUtil() {
-        throw new IllegalStateException("utility class");
     }
 
     public static String getObjType(AlertPack pack) {
@@ -19,7 +18,6 @@ public class AlertPackUtil {
         } else {
             return pack.objType;
         }
-
     }
 
     public static String getObjName(AlertPack pack) {

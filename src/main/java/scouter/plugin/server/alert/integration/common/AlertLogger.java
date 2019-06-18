@@ -8,15 +8,18 @@ import scouter.server.Logger;
  */
 public class AlertLogger {
 
+    private static final String EXT_PLUGIN_ALERT_DEBUG = "ext_plugin_alert_debug";
+
     private boolean debug;
 
     public AlertLogger() {
         Configure conf = Configure.getInstance();
-        this.debug = conf.getBoolean(Properties.EXT_PLUGIN_ALERT_DEBUG, true);
+        this.debug = conf.getBoolean(EXT_PLUGIN_ALERT_DEBUG, true);
     }
 
     public void println(String message) {
         String threadName = "[" + Thread.currentThread().getName() + "] ";
+
         if (debug) {
             Logger.println(threadName + message);
             System.out.println(threadName + message);
