@@ -1,6 +1,7 @@
 package scouter.plugin.server.alert.integration;
 
 import scouter.lang.pack.AlertPack;
+import scouter.plugin.server.alert.integration.common.AlertPackUtil;
 import scouter.plugin.server.alert.integration.common.MonitoringGroupConfigure;
 import scouter.plugin.server.alert.integration.slack.SlackTask;
 import scouter.plugin.server.alert.integration.telegram.TelegramTask;
@@ -32,8 +33,9 @@ public enum MessagingApp {
     }
 
     public boolean shouldRun(MonitoringGroupConfigure groupConf, AlertPack pack) {
-        return groupConf.getBoolean(this.enableProperty, pack.objType, false) &&
-            groupConf.getInt(this.levelProperty, pack.objType, 0) <= pack.level;
+        String objType = AlertPackUtil.getObjType(pack);
+        return groupConf.getBoolean(this.enableProperty, objType, false) &&
+            groupConf.getInt(this.levelProperty, objType, 0) <= pack.level;
     }
 
     abstract Thread newThread(MonitoringGroupConfigure groupConf, AlertPack pack);
