@@ -70,6 +70,9 @@ class TeamsMessage {
 		@SerializedName("facts")
         private List<Fact> facts;
 
+		@SerializedName("markdown")
+		private boolean markdown = false;
+
 		public Section(String activityTitle, String activitySubTitle, List<Fact> facts) {
 			this.activityTitle = activityTitle;
 			this.activitySubTitle = activitySubTitle;

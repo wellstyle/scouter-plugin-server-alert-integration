@@ -13,31 +13,34 @@ import static org.mockito.Mockito.when;
  */
 public class TeamsTaskTest {
 
-    private static final String MESSAGE_TEMPLATE = "app01 is not running. OBJECT  objType=tomcat objHash=z1d6f0r6 objName=app01 addr=127.0.0.1";
+    private static final String OBJ_TYPE = "search_plus_ad_host";
+    private static final byte LEVEL = 0x1;
+    private static final String TITLE= "WARNING_CPU_HIGH";
+    private static final String MESSAGE= "cpu high 98.698616%";
+    private static final String WEBHOOK_URL = "https://webhook.site/ca5fab1b-e5f9-452d-9a38-d5b7f9d7b241";
 
     private MonitoringGroupConfigure groupConfigure;
     private AlertPack alertPack;
-    private String objType = "tomcat";
 
     @Before
     public void setUp() {
         groupConfigure = mock(MonitoringGroupConfigure.class);
         alertPack = mock(AlertPack.class);
 
-        alertPack.objType = "scouter";
-        alertPack.level = 0x1;
-        alertPack.title = "An object has been inactivated.";
-        alertPack.message = MESSAGE_TEMPLATE;
+        alertPack.objType = OBJ_TYPE;
+        alertPack.level = LEVEL;
+        alertPack.title = TITLE;
+        alertPack.message = MESSAGE;
 
         when(groupConfigure.isTrace()).thenReturn(true);
     }
 
     @Test
     public void run() {
-        when(groupConfigure.getValue(TeamsTask.EXT_PLUGIN_ALERT_TEAMS_WEBHOOK_URL, objType)).thenReturn("https://webhook.site/ca5fab1b-e5f9-452d-9a38-d5b7f9d7b241");
+        when(groupConfigure.getValue(TeamsTask.EXT_PLUGIN_ALERT_TEAMS_WEBHOOK_URL, OBJ_TYPE)).thenReturn(WEBHOOK_URL);
 
-        TeamsTask telegramTask = new TeamsTask(groupConfigure, alertPack);
-        telegramTask.run();
+        TeamsTask teamsTask = new TeamsTask(groupConfigure, alertPack);
+        teamsTask.run();
     }
 
 }
