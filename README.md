@@ -20,37 +20,29 @@
 
 ## Properties (conf/scouter.conf)
 
-### Common 
-- `ext_plugin_alert_debug`: debug logging option - default true
-
-### Slack 
-- `ext_plugin_alert_slack_enable`: use alert to a slack workspace or not (true / false) - default false
-- `ext_plugin_alert_slack_level`: alert level to send (0: INFO, 1: WARN, 2: ERROR, 3: FATAL) - default 0
-- `ext_plugin_alert_slack_webhook_url`: slack webhook url
-- `ext_plugin_alert_slack_channel`: slack channel name
-- `ext_plugin_alert_slack_bot_name`: slack bot name 
-- `ext_plugin_alert_slack_icon_url`: slack icon url 
-- `ext_plugin_alert_slack_icon_emoji`: slack icon emoji
-
-- `<monitoring-group-type>.ext_plugin_alert_slack_level`: alert level to send of `monitoring_group_type` or `obj_type` - default `ext_plugin_alert_slack_level`
-- `<monitoring-group-type>.ext_plugin_alert_slack_channel`: slack channel name of `monitoring_group_type` or `obj_type` - default `ext_plugin_alert_slack_channel`
-
-### Telegram
-- `ext_plugin_alert_telegram_enable`: use alert to a telegram messenger or not (true / false) - default false
-- `ext_plugin_alert_telegram_level`: alert level to send (0: INFO, 1: WARN, 2: ERROR, 3: FATAL) - default 0
-- `ext_plugin_alert_telegram_bot_token`: telegram bot token
-- `ext_plugin_alert_telegram_chat_id`: telegram chat-room id
-
-- `<monitoring-group-type>.ext_plugin_alert_telegram_level`: alert level to send of `monitoring_group_type` or `obj_type` - default `ext_plugin_alert_telegram_level`
-- `<monitoring-group-type>.ext_plugin_alert_telegram_chat_id`: slack telegram chat-room id of `monitoring_group_type` or `obj_type` - default `ext_plugin_alert_telegram_chat_id`
-
-### Teams
-- `ext_plugin_alert_teams_enable`: use alert to a teams or not (true / false) - default false
-- `ext_plugin_alert_teams_webhook_url`: teams webhook url
-- `ext_plugin_alert_teams_level`: alert level to send (0: INFO, 1: WARN, 2: ERROR, 3: FATAL) - default 0
-
-- `<monitoring-group-type>.ext_plugin_alert_teams_webhook_url`: teams webhook url of `monitoring_group_type` or `obj_type` - default `ext_plugin_alert_teams_webhook_url`
-- `<monitoring-group-type>.ext_plugin_alert_teams_level`: alert level to send of `monitoring_group_type` or `obj_type` - default `ext_plugin_alert_teams_level`
+App | name | desc | default 
+--- | --- | --- | ---
+Common | `ext_plugin_alert_debug` | debug logging option | true
+Slack | `ext_plugin_alert_slack_enable` | use alert to a slack workspace or not (true / false) | false
+Slack | `ext_plugin_alert_slack_level` | alert level to send (0: INFO, 1: WARN, 2: ERROR, 3: FATAL) | 0
+Slack | `ext_plugin_alert_slack_webhook_url` | slack webhook url
+Slack | `ext_plugin_alert_slack_channel` | slack channel name
+Slack | `ext_plugin_alert_slack_bot_name` | slack bot name 
+Slack | `ext_plugin_alert_slack_icon_url` | slack icon url 
+Slack | `ext_plugin_alert_slack_icon_emoji` | slack icon emoji
+Slack | `<objectType>.ext_plugin_alert_slack_level` | alert level to send of `monitoring_group_type` or `obj_type` | `ext_plugin_alert_slack_level`
+Slack | `<objectType>.ext_plugin_alert_slack_channel` | slack channel name of `monitoring_group_type` or `obj_type` | `ext_plugin_alert_slack_channel`
+Telegram | `ext_plugin_alert_telegram_enable` | use alert to a telegram messenger or not (true / false) | false
+Telegram | `ext_plugin_alert_telegram_level` | alert level to send (0: INFO, 1: WARN, 2: ERROR, 3: FATAL) | 0
+Telegram | `ext_plugin_alert_telegram_bot_token` | telegram bot token
+Telegram | `ext_plugin_alert_telegram_chat_id` | telegram chat-room id
+Telegram | `<objectType>.ext_plugin_alert_telegram_level` | alert level to send of `monitoring_group_type` or `obj_type` | `ext_plugin_alert_telegram_level`
+Telegram | `<objectType>.ext_plugin_alert_telegram_chat_id` | slack telegram chat-room id of `monitoring_group_type` or `obj_type` | `ext_plugin_alert_telegram_chat_id`
+Teams | `ext_plugin_alert_teams_enable` | use alert to a teams or not (true / false) | false
+Teams | `ext_plugin_alert_teams_webhook_url` | teams webhook url
+Teams | `ext_plugin_alert_teams_level` | alert level to send (0: INFO, 1: WARN, 2: ERROR, 3: FATAL) | 0
+Teams | `<objectType>.ext_plugin_alert_teams_webhook_url` | teams webhook url of `monitoring_group_type` or `obj_type` | `ext_plugin_alert_teams_webhook_url`
+Teams | `<objectType>.ext_plugin_alert_teams_level` | alert level to send of `monitoring_group_type` or `obj_type` | `ext_plugin_alert_teams_level`
 
 ### Example
 
