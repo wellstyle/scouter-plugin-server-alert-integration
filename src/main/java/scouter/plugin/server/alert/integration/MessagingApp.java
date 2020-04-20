@@ -4,6 +4,7 @@ import scouter.lang.pack.AlertPack;
 import scouter.plugin.server.alert.integration.common.AlertPackUtil;
 import scouter.plugin.server.alert.integration.common.MonitoringGroupConfigure;
 import scouter.plugin.server.alert.integration.slack.SlackTask;
+import scouter.plugin.server.alert.integration.teams.TeamsTask;
 import scouter.plugin.server.alert.integration.telegram.TelegramTask;
 
 /**
@@ -19,6 +20,12 @@ public enum MessagingApp {
     TELEGRAM("TelegramTask", "ext_plugin_alert_telegram_enable", "ext_plugin_alert_telegram_level") {
         public Thread newThread(MonitoringGroupConfigure groupConf, AlertPack pack) {
             return new Thread(new TelegramTask(groupConf, pack), this.threadName);
+        }
+    },
+
+    TEAMS("TeamsTask", "ext_plugin_alert_teams_enable", "ext_plugin_alert_teams_level") {
+        public Thread newThread(MonitoringGroupConfigure groupConf, AlertPack pack) {
+            return new Thread(new TeamsTask(groupConf, pack), this.threadName);
         }
     };
 

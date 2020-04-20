@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.com/wellstyle/scouter-plugin-server-alert-integration.svg?branch=master)](https://travis-ci.com/wellstyle/scouter-plugin-server-alert-integration)
 [![Code Coverage](https://codecov.io/gh/wellstyle/scouter-plugin-server-alert-integration/branch/master/graph/badge.svg)](https://codecov.io/gh/wellstyle/scouter-plugin-server-alert-integration)
 
-## Scouter server plugin to send a alert via slack, telegram
+## Scouter server plugin send a alert to telegram, slack and teams
 
 - This plug-in sends alert messages generated from the server to the `telegram` messenger specific channel.
 - This plug-in sends alert messages generated from the server to the `slack` workspace specific channel.
@@ -20,8 +20,10 @@
 
 ## Properties (conf/scouter.conf)
 
+### Common 
 - `ext_plugin_alert_debug`: debug logging option - default true
 
+### Slack 
 - `ext_plugin_alert_slack_enable`: use alert to a slack workspace or not (true / false) - default false
 - `ext_plugin_alert_slack_level`: alert level to send (0: INFO, 1: WARN, 2: ERROR, 3: FATAL) - default 0
 - `ext_plugin_alert_slack_webhook_url`: slack webhook url
@@ -33,6 +35,7 @@
 - `<monitoring-group-type>.ext_plugin_alert_slack_level`: alert level to send of `monitoring_group_type` or `obj_type` - default `ext_plugin_alert_slack_level`
 - `<monitoring-group-type>.ext_plugin_alert_slack_channel`: slack channel name of `monitoring_group_type` or `obj_type` - default `ext_plugin_alert_slack_channel`
 
+### Telegram
 - `ext_plugin_alert_telegram_enable`: use alert to a telegram messenger or not (true / false) - default false
 - `ext_plugin_alert_telegram_level`: alert level to send (0: INFO, 1: WARN, 2: ERROR, 3: FATAL) - default 0
 - `ext_plugin_alert_telegram_bot_token`: telegram bot token
@@ -40,6 +43,14 @@
 
 - `<monitoring-group-type>.ext_plugin_alert_telegram_level`: alert level to send of `monitoring_group_type` or `obj_type` - default `ext_plugin_alert_telegram_level`
 - `<monitoring-group-type>.ext_plugin_alert_telegram_chat_id`: slack telegram chat-room id of `monitoring_group_type` or `obj_type` - default `ext_plugin_alert_telegram_chat_id`
+
+### Teams
+- `ext_plugin_alert_teams_enable`: use alert to a teams or not (true / false) - default false
+- `ext_plugin_alert_teams_webhook_url`: teams webhook url
+- `ext_plugin_alert_teams_level`: alert level to send (0: INFO, 1: WARN, 2: ERROR, 3: FATAL) - default 0
+
+- `<monitoring-group-type>.ext_plugin_alert_teams_webhook_url`: teams webhook url of `monitoring_group_type` or `obj_type` - default `ext_plugin_alert_teams_webhook_url`
+- `<monitoring-group-type>.ext_plugin_alert_teams_level`: alert level to send of `monitoring_group_type` or `obj_type` - default `ext_plugin_alert_teams_level`
 
 ### Example
 
@@ -69,6 +80,16 @@ ext_plugin_alert_telegram_chat_id=@ScouterDemoChannel
 ## Alert Telegram for Monitoring Group
 group-1.ext_plugin_alert_telegram_chat_id=@ScouterDemoGroup1Channel
 group-2.ext_plugin_alert_telegram_chat_id=@ScouterDemoGroup2Channel
+
+# Alert Teams
+ext_plugin_alert_teams_enable=true
+ext_plugin_alert_teams_level=0
+ext_plugin_alert_teams_webhook_url=https://outlook.office365.com/webhook/value1@value2/IncomingWebhook/value3/value4
+
+## Alert Teams for Monitoring Group
+group-1.ext_plugin_alert_teams_webhook_url=https://outlook.office365.com/webhook/value1@value2/IncomingWebhook/value3/value4
+group-2.ext_plugin_alert_teams_webhook_url=https://outlook.office365.com/webhook/value1@value2/IncomingWebhook/value3/value4
+group-2.ext_plugin_alert_teams_level=1
 ```
 
 ## Dependencies
