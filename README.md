@@ -3,20 +3,21 @@
 [![Build Status](https://travis-ci.com/wellstyle/scouter-plugin-server-alert-integration.svg?branch=master)](https://travis-ci.com/wellstyle/scouter-plugin-server-alert-integration)
 [![Code Coverage](https://codecov.io/gh/wellstyle/scouter-plugin-server-alert-integration/branch/master/graph/badge.svg)](https://codecov.io/gh/wellstyle/scouter-plugin-server-alert-integration)
 
-## Scouter server plugin send a alert to telegram, slack and teams
+## Scouter server plugin send a alert to Telegram, Slack and Teams
 
-- This plug-in sends alert messages generated from the server to the `telegram` messenger specific channel.
-- This plug-in sends alert messages generated from the server to the `slack` workspace specific channel.
+- This plug-in sends alert messages generated from the server to 
+    - the `Telegram` messenger specific channel.
+    - the `Slack` workspace specific channel.
+    - the `Microsoft Teams` specific channel.
 - Each monitoring group(`monitoring_group_type` or `obj_type`) can send to different channels.
 - Currently supported types of Alert are as follows
-    - All alert occurred from agents.
-	  - on exceeding CPU threshold of Host agent(warning / fatal)
-	  - on exceeding Memory threshold of Host agent (warning / fatal)
-	  - on exceeding Disk usage threshold of Host agent (warning / fatal)
-	  - agent's connection
-	  - agent's disconnection
-	  - agent's reconnection
-	  - else all alert
+    - on exceeding CPU threshold of Host agent(warning / fatal)
+    - on exceeding Memory threshold of Host agent (warning / fatal)
+    - on exceeding Disk usage threshold of Host agent (warning / fatal)
+    - agent's connection
+    - agent's disconnection
+    - agent's reconnection
+    - else all alert
 
 ## Properties (conf/scouter.conf)
 

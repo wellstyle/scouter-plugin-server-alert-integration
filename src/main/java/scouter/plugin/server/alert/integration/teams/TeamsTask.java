@@ -13,8 +13,7 @@ import java.io.IOException;
 /**
  * Thread class that sends messages via teams
  *
- * @author Se-Wang Lee(ssamzie101@gmail.com) on 2016. 5. 2.
- * @author yj.seo on 2019. 6. 5.
+ * @author yj.seo on 2020. 4. 20.
  */
 public class TeamsTask implements Runnable {
 

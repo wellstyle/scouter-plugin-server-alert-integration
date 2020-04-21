@@ -28,7 +28,7 @@ import java.util.List;
 /**
  * Alert message class to send alert via Teams
  * 
- * @author yj.seo on 2020. 6. 5.
+ * @author yj.seo on 2020. 4. 20.
  *
  * reference: https://docs.microsoft.com/ko-kr/outlook/actionable-messages/message-card-reference
  */
