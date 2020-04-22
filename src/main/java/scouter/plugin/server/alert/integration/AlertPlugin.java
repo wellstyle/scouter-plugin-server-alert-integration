@@ -61,7 +61,6 @@ public class AlertPlugin {
             ap.title = "XLog Error";
             ap.message = String.format("%s --- service: %s, txid: %s, gxid: %s", error, service, txId, gxId);
             ap.objType = objType;
-            logger.println("ap: " + ap.toString());
             alert(ap);
         }
 
