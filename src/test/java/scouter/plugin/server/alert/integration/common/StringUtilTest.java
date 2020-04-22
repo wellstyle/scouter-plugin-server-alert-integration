@@ -5,6 +5,9 @@ import scouter.lang.pack.AlertPack;
 
 import static org.junit.Assert.*;
 
+/**
+ * @author yj.seo on 2019. 06. 18.
+ */
 public class StringUtilTest {
 
     private static final String MESSAGE_TEMPLATE = "app01 is not running. OBJECT  objType=tomcat objHash=z1d6f0r6 objName=app01 addr=127.0.0.1";
