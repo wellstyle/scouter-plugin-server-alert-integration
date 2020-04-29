@@ -4,7 +4,7 @@
 
     <groupId>scouter.plugin.server</groupId>
     <artifactId>scouter-plugin-server-alert-integration</artifactId>
-    <version>1.1.0-alpha</version>
+    <version>1.1.1-alpha</version>
     <packaging>jar</packaging>
     <name>scouter-plugin-server-alert-integration</name>
 

@@ -23,4 +23,19 @@ public class StringUtil {
         return s == null || s.length() == 0;
     }
 
+    public static boolean contains(String s, String commaSeparatedText) {
+        if (commaSeparatedText == null) {
+            return false;
+        }
+
+        String[] words = commaSeparatedText.trim().split(",");
+        for (String word : words) {
+            if (s.contains(word)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
 }

@@ -8,6 +8,7 @@ import scouter.lang.plugin.PluginConstants;
 import scouter.lang.plugin.annotation.ServerPlugin;
 import scouter.plugin.server.alert.integration.common.AlertLogger;
 import scouter.plugin.server.alert.integration.common.MonitoringGroupConfigure;
+import scouter.plugin.server.alert.integration.common.StringUtil;
 import scouter.server.Configure;
 import scouter.server.core.AgentManager;
 import scouter.server.db.TextRD;
@@ -50,20 +51,25 @@ public class AlertPlugin {
         // XLog Error
         if (pack.error != 0) {
             String date = DateUtil.yyyymmdd(pack.endTime);
-            String service = TextRD.getString(date, TextTypes.SERVICE, pack.service);
             String error = TextRD.getString(date, TextTypes.ERROR, pack.error);
-            String txId = Hexa32.toString32(pack.txid);
-            String gxId = Hexa32.toString32(pack.gxid);
+            String excludeError = groupConf.getValue("ext_plugin_alert_xlog_exclude_error_words", objType);
 
-            AlertPack ap = new AlertPack();
-            ap.level = AlertLevel.ERROR;
-            ap.objHash = pack.objHash;
-            ap.title = "XLog Error";
-            ap.message = String.format("%s --- service: %s, txid: %s, gxid: %s", error, service, txId, gxId);
-            ap.objType = objType;
-            alert(ap);
+            if (!StringUtil.contains(error, excludeError)) {
+                String service = TextRD.getString(date, TextTypes.SERVICE, pack.service);
+                String txId = Hexa32.toString32(pack.txid);
+                String gxId = Hexa32.toString32(pack.gxid);
+
+                AlertPack ap = new AlertPack();
+                ap.level = AlertLevel.ERROR;
+                ap.objHash = pack.objHash;
+                ap.title = "XLog Error";
+                ap.message = String.format("%s --- service: %s, txid: %s, gxid: %s", error, service, txId, gxId);
+                ap.objType = objType;
+                alert(ap);
+            }
         }
-
     }
+
+
 
 }

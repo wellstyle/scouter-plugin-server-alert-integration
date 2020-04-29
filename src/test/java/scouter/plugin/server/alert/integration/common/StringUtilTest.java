@@ -2,6 +2,7 @@ package scouter.plugin.server.alert.integration.common;
 
 import org.junit.Test;
 import scouter.lang.pack.AlertPack;
+import sun.swing.StringUIClientPropertyKey;
 
 import static org.junit.Assert.*;
 
@@ -53,4 +54,15 @@ public class StringUtilTest {
         assertFalse(StringUtil.isEmpty("abcd"));
     }
 
+    @Test
+    public void contains() {
+        String message = "404 : [no body]";
+        String text = "404 : ,";
+
+        assertTrue(StringUtil.contains(message, text));
+
+        assertFalse(StringUtil.contains(message, null));
+        assertFalse(StringUtil.contains(message, "333,222"));
+        assertFalse(StringUtil.contains(message, " 403 : [no body],Bad chunk header "));
+    }
 }
